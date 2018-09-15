@@ -1,4 +1,4 @@
-# Capability URL for media content
+# Capability URL
 ###### greenpaper 09-15-18
 
 ### Motivation
