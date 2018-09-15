@@ -45,7 +45,7 @@ else
 
 ##### /sign
 ```
-send sts header and message to signing server
+send the OIDC bearer token provided by the ADFS server and message to signing server
 if authentication is approved
  append expire time to message
  append user info to message
@@ -64,8 +64,6 @@ else
  redirect to 410 Gone
 ```
 
-## Notes
-
-This implementation does not rely on a shared generateSharedKey. The initial 
+This implementation does not rely on a shared key. The initial 
 authentication is deferred to the Active Directory used by the client.
 
