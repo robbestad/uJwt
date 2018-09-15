@@ -1,14 +1,14 @@
-const DateAdd = require('../date-add.js');
+const AddMinutes = require('../lib/add-minutes.js');
 
-describe('Add minutes to add', () => {
+describe('Add minutes', () => {
 	it('Verifies that date-fnc adds 1 minute to current Date', () => {
 		const now = new Date();
-		const future = DateAdd(now,"minute",1);
+		const future = AddMinutes(now,1);
 		expect(future.getTime()).toBe(now.getTime()+60000)
 	});
 	it('Verifies that date-fnc adds 10 minutes to current Date', () => {
 		const now = new Date();
-		const future = DateAdd(now,"minute",10);
+		const future = AddMinutes(now,10);
 		expect(future.getTime()).toBe(now.getTime()+600000)
 	});
 })

@@ -1,10 +1,10 @@
 const Crypto = require('crypto');
-const DateAdd = require('./date-add');
+const AddMinutes = require('./add-minutes');
 
 function GenerateSignature(key, _opts) {
 	const opts = {
 		..._opts,
-		"expireAt": DateAdd(new Date(), "minute", 20)
+		"expireAt": AddMinutes(new Date(), 20)
 	}
 	const query = Buffer.from(JSON.stringify(opts)).toString("base64");
 	const sharedSecret = key.toString();
