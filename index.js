@@ -1,8 +1,7 @@
-const path = require("path");
-const EncodeSignature = require(path.resolve(__dirname, "client/lib/encode.js"));
-const DecodeSignature = require(path.resolve(__dirname, "client/lib/decode.js"));
+import EncodeSignature from "./client/lib/encode.js";
+import DecodeSignature from "./client/lib/decode.js";
 
-module.exports = {
+export default {
   EncodeSignature,
   DecodeSignature
 }

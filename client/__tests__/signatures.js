@@ -1,7 +1,8 @@
-const CapabilityUrl = require("../../index.js");
+import CapabilityUrl from "../../index.js";
+
 const {EncodeSignature, DecodeSignature} = CapabilityUrl;
 
-const key="big-secret"
+const key = "big-secret"
 let generatedToken = "";
 let opts = {};
 

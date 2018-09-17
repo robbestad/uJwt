@@ -1,4 +1,4 @@
-const AddMinutes = require('../lib/add-minutes.js');
+import AddMinutes from "../lib/add-minutes.js";
 
 describe('Add minutes', () => {
 	it('Verifies that date-fnc adds 1 minute to current Date', () => {

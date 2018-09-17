@@ -3,4 +3,4 @@ function addMinutes(date, units) {
 	_date.setTime(_date.getTime() + units * 60000);
 	return _date;
 }
-module.exports = addMinutes;
+export default addMinutes;

@@ -26,8 +26,6 @@
     "babel-env": "^2.4.1",
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
-    "standard-version": "^4.4.0",
-    "webpack": "^4.19.0",
-    "webpack-cli": "^3.1.0"
+    "standard-version": "^4.4.0"
   }
 }

@@ -1,4 +1,4 @@
-const Crypto = require('crypto');
+import Crypto from "crypto";
 
 function DecodeSignature(key, queryString) {
 
@@ -23,4 +23,4 @@ function DecodeSignature(key, queryString) {
 	}
 }
 
-module.exports = DecodeSignature;
+export default DecodeSignature;
