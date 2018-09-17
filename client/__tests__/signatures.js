@@ -1,5 +1,5 @@
-const EncodeSignature = require('../lib/encode.js');
-const DecodeSignature = require('../lib/decode.js');
+const CapabilityUrl = require("../../index.js");
+const {EncodeSignature, DecodeSignature} = CapabilityUrl;
 
 const key="big-secret"
 let generatedToken = "";
