@@ -9,7 +9,8 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
-    "release": "standard-version"
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin master && npm publish --access=public"
   },
   "jest": {
     "verbose": true,
