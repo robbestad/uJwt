@@ -1,5 +1,6 @@
 {
-  "name": "capability-url",
+  "name": "@svenardo/capability-url",
+  "private": false,
   "version": "0.1.1",
   "description": "Structure for generation of secure capability URLs",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
@@ -8,7 +9,17 @@
     "test": "jest",
     "release": "standard-version"
   },
-  "dependencies": {
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**client/**"
+    ],
+    "roots": [
+      "client"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
     "standard-version": "^4.4.0"
   }
 }
