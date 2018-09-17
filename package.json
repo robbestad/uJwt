@@ -1,7 +1,7 @@
 {
   "name": "@svenardo/capability-url",
   "private": false,
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Structure for generation of secure capability URLs",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "index.js",
