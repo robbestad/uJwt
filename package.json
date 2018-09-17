@@ -1,7 +1,7 @@
 {
   "name": "@svenardo/capability-url",
   "private": false,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Structure for generation of secure capability URLs",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "index.js",
@@ -22,9 +22,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.0.1",
     "babel-env": "^2.4.1",
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
-    "standard-version": "^4.4.0"
+    "standard-version": "^4.4.0",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.1.0"
   }
 }
