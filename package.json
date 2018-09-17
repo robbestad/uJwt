@@ -1,14 +1,15 @@
 {
   "name": "@svenardo/capability-url",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Structure for generation of secure capability URLs",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
+    "prerelease": "rollup -c",
     "release": "standard-version",
     "postrelease": "git push --follow-tags origin master && npm publish --access=public"
   },
@@ -26,6 +27,7 @@
     "babel-env": "^2.4.1",
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
+    "rollup": "^0.66.0",
     "standard-version": "^4.4.0"
   }
 }
