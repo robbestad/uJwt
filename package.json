@@ -1,8 +1,8 @@
 {
-  "name": "@svenardo/capability-url",
+  "name": "@svenardo/jwt",
   "private": false,
-  "version": "0.1.7",
-  "description": "Structure for generation of secure capability URLs",
+  "version": "0.1.8",
+  "description": "Just another JWT-tool",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
   "scripts": {
