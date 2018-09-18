@@ -1,8 +1,8 @@
-# Capability URL
+# JWT
 
 ### Motivation
 
-* Provide a capability-based link that allows access to a given resource to a given user for a given time
+* Provide a capability-based link using a JWT (JSON Web Token) that allows access to a given resource to a given user for a given time
 * The link authenticates the user without any calls to the authentication server
 * The message contains an expireAt timestamp which denies access when expired
 

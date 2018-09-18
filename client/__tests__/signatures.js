@@ -1,6 +1,6 @@
-import CapabilityUrl from "../../index.js";
+import JWT from "../../index.js";
 
-const {EncodeSignature, DecodeSignature} = CapabilityUrl;
+const {EncodeSignature, DecodeSignature} = JWT;
 
 const key = "big-secret"
 let generatedToken = "";
@@ -13,14 +13,17 @@ describe('Signatures', () => {
 		};
 		generatedToken = EncodeSignature(key, opts);
 		expect(typeof generatedToken).toBe("string");
-		// console.log(generatedToken)
+		console.log(generatedToken)
 	});
 
 })
 describe('Signatures', () => {
-	it('Decodes a queryString', () => {
+	it('Decodes the expireAt', () => {
 		const result = DecodeSignature(key, generatedToken);
 		expect(typeof JSON.parse(result).expireAt).toBe("string");
-		expect(JSON.parse(result).file).toBe(opts.file);
+	});
+	it('Decodes the filename', () => {
+		const result = DecodeSignature(key, generatedToken);
+		expect(JSON.parse(result).file).toEqual(opts.file);
 	});
 })
