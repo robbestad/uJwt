@@ -15,17 +15,17 @@ client generates message
   client generates signature
     signature generation appends expire time to message
     sign with HMAC SHA256 using a shared secret generateSharedKey
-      return message.signature
+      return header.message.signature
 ```
-The result is a message.signature that can be used in a capability based link
+The result is a header.message.signature that can be used in a capability based link
 
-Example _message.signature_:
+Example _header.message.signature_:
 ```
-eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
 ```
 Example _link_:
 ```
-/resource/eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
+/resource/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
 ```
 
 ##### Handling /resource/message.signature
