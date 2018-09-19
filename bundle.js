@@ -12,13 +12,16 @@ function addMinutes(date, units) {
 
 function GenerateSignature(key, _opts) {
 	const opts = Object.assign({}, _opts, {
-		"expireAt": addMinutes(new Date(), 20),
+		"expireAt": addMinutes(new Date(), 1).getTime()/1000,
 	});
 	const query = Buffer.from(JSON.stringify(opts)).toString("base64");
 	const sharedSecret = key.toString();
 	const signature = Crypto.createHmac('sha256', sharedSecret).update(query).digest('base64');
-	return `${query}.${signature}`;
-
+	const header = Buffer.from(JSON.stringify({
+		  "alg": "HS256",
+			"typ": "JWT"
+	})).toString("base64");
+	return `${header}.${query}.${signature}`;
 }
 
 function DecodeSignature(key, queryString) {
@@ -26,10 +29,11 @@ function DecodeSignature(key, queryString) {
 	const sharedSecret = key;
 
 	const _ = queryString.split(".");
-	const query = Buffer.from(_[0], 'base64').toString('ascii'),
-		retrievedSignature = _[1];
+	const query = Buffer.from(_[1], 'base64').toString('ascii'),
+		retrievedSignature = _[2],
+		retrievedHeader = _[0];
 
-	const computedSignature = Crypto.createHmac('sha256', sharedSecret).update(_[0]).digest('base64');
+	const computedSignature = Crypto.createHmac('sha256', sharedSecret).update(_[1]).digest('base64');
 	const computedSignatureBuffer = Buffer.from(computedSignature, 'base64');
 	const retrievedSignatureBuffer = Buffer.from(retrievedSignature, 'base64');
 

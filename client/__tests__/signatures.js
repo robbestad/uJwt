@@ -13,14 +13,13 @@ describe('Signatures', () => {
 		};
 		generatedToken = EncodeSignature(key, opts);
 		expect(typeof generatedToken).toBe("string");
-		console.log(generatedToken)
 	});
 
 })
 describe('Signatures', () => {
 	it('Decodes the expireAt', () => {
 		const result = DecodeSignature(key, generatedToken);
-		expect(typeof JSON.parse(result).expireAt).toBe("string");
+		expect(typeof JSON.parse(result).expireAt).toBe("number");
 	});
 	it('Decodes the filename', () => {
 		const result = DecodeSignature(key, generatedToken);
