@@ -12,6 +12,7 @@ describe('Signatures', () => {
 			"file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
 		};
 		generatedToken = EncodeSignature(key, opts, 2, "hours");
+		console.log(generatedToken)
 		expect(typeof generatedToken).toBe("string");
 	});
 
@@ -19,7 +20,7 @@ describe('Signatures', () => {
 describe('Signatures', () => {
 	it('Decodes the expireAt', () => {
 		const result = DecodeSignature(key, generatedToken);
-		expect(typeof JSON.parse(result).expireAt).toBe("number");
+		expect(typeof JSON.parse(result).exp).toBe("number");
 	});
 	it('Decodes the filename', () => {
 		const result = DecodeSignature(key, generatedToken);
