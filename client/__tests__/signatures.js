@@ -11,7 +11,7 @@ describe('Signatures', () => {
 		opts = {
 			"file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
 		};
-		generatedToken = EncodeSignature(key, opts);
+		generatedToken = EncodeSignature(key, opts, 2, "hours");
 		expect(typeof generatedToken).toBe("string");
 	});
 

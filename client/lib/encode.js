@@ -1,11 +1,23 @@
 import Crypto from "crypto";
 import AddMinutes from "./add-minutes";
 import AddSeconds from "./add-minutes";
+import AddHours from "./add-hours";
 
-function GenerateSignature(key, _opts, _seconds) {
-	const seconds = _seconds || 60;
+function GenerateSignature(key, _opts, units, unit) {
+	let expireAt="";
+	switch(unit){
+		case "seconds": {
+			expireAt = AddSeconds(new Date(), units).getTime()
+		}
+		case "minutes": {
+			expireAt = AddMinutes(new Date(), units).getTime()
+		}
+		case "hours": {
+			expireAt = AddHours(new Date(), units).getTime()
+		}
+	}
 	const opts = Object.assign({}, _opts, {
-		"expireAt": AddSeconds(new Date(), 1).getTime()/1000,
+		"expireAt": expireAt,
 	});
 	const query = Buffer.from(JSON.stringify(opts)).toString("base64");
 	const sharedSecret = key.toString();

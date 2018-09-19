@@ -10,7 +10,7 @@ function addMinutes(date, units) {
 	return _date;
 }
 
-function GenerateSignature(key, _opts) {
+function GenerateSignature(key, _opts, _seconds) {
 	const opts = Object.assign({}, _opts, {
 		"expireAt": addMinutes(new Date(), 1).getTime()/1000,
 	});
