@@ -9,7 +9,7 @@ function DecodeSignature(key, queryString) {
 		retrievedSignature = _[2],
 		retrievedHeader = _[0];
 
-	const computedSignature = Crypto.createHmac('sha256', sharedSecret).update(_[1]).digest('base64');
+	const computedSignature = Crypto.createHmac('sha256', sharedSecret).update(`${_[0]}${_[1]}`).digest('base64');
 	const computedSignatureBuffer = Buffer.from(computedSignature, 'base64');
 	const retrievedSignatureBuffer = Buffer.from(retrievedSignature, 'base64');
 
