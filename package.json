@@ -1,7 +1,7 @@
 {
   "name": "@svenardo/jwt",
   "private": false,
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Just another JWT-tool",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
