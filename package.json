@@ -1,8 +1,8 @@
 {
-  "name": "@svenardo/jwt",
+  "name": "@svenardo/openresty-jwt",
   "private": false,
   "version": "0.1.17",
-  "description": "Just another JWT-tool",
+  "description": "Open-resty compatible JWT token generation",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
   "scripts": {
