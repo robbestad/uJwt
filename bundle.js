@@ -30,7 +30,7 @@ function GenerateSignature(key, _opts, units, unit) {
 		}
 	}
 	const opts = Object.assign({}, _opts, {
-		"expireAt": expireAt,
+		"exp": expireAt,
 	});
 	const query = Buffer.from(JSON.stringify(opts)).toString("base64");
 	const sharedSecret = key.toString();

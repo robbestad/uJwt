@@ -6,6 +6,7 @@
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
   "scripts": {
+    "test-new-token": "sh test/new-token.sh",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
