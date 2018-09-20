@@ -54,9 +54,6 @@ function CreateJWT(claims) {
 	// encoding.
 	// --> Base64Claims
 
-	const joseHeader = CreateJOSEbody(header);
-	const joseMessage = CreateJOSEbody(claims);
-
 	// 4. Depending upon whether the JWT is a JWS or JWE, there are two
 	// cases:
 	// 	* If the JWT is a JWS, create a JWS using the Message as the JWS
@@ -81,6 +78,9 @@ function CreateJWT(claims) {
 	// --> nbf (not before) reverse expiration time
 	// --> iat (issued at, timestamp)
 	// --> jti (unique identifier. can be used to prevent the JWT from being replayed)
+
+	const joseHeader = CreateJOSEbody(header);
+	const joseMessage = CreateJOSEbody(claims);
 	const signature = CreateToken("sha256", "big-secret", joseHeader, joseMessage);
 	return `${joseHeader}.${joseMessage}.${signature}`
 }
@@ -139,11 +139,11 @@ function Verify(key, token) {
 }
 
 export default {
+	Sign,
+	Verify,
 	OctetFromClaims,
 	Base64Claims,
-	CreateJWT,
-	Sign,
-	Verify
+	CreateJWT
 }
 
 
