@@ -14,7 +14,7 @@ client generates message
   append user info to message
   client generates signature
     signature generation appends expire time to message
-    sign with HMAC SHA256 using a shared secret generateSharedKey
+    sign header.message according to JWT spec with HMAC SHA256 using a shared secret 
       return header.message.signature
 ```
 The result is a header.message.signature that can be used in a capability based link
@@ -31,7 +31,7 @@ Example _link_:
 ##### Handling /resource/message.signature
 ```
 server receives request
-verify that signature and message matches using HMAC SHA256 and the same shared secret generateSharedKey
+verify that signature and message matches using HMAC SHA256 and the same shared secret 
 verify that current time is less than expire time
 if valid
  redirect to file
@@ -48,8 +48,8 @@ send the OIDC bearer token provided by the ADFS server and message to signing se
 if authentication is approved
  append expire time to message
  append user info to message
- sign message with HMAC SHA256 and a secret signature
-   return message and signed generateSharedKey
+ sign header.message with HMAC SHA256 and the shared key
+   return token
 ```
 
 ##### /verify
