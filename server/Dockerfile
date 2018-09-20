@@ -1,4 +1,4 @@
-FROM svena/nginx-node
+FROM svena/nginx-openresty
 
 COPY nginx.conf /nginx.conf
 RUN mkdir /lua
