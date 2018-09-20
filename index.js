@@ -1,8 +1,7 @@
-import EncodeSignature from "./client/lib/encode.js";
-import DecodeSignature from "./client/lib/decode.js";
+import {Sign, Verify} from "./client/lib/jwt.js";
 
 export default {
-  EncodeSignature,
-  DecodeSignature
+	Sign,
+	Verify
 }
 

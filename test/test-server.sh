@@ -1,5 +1,6 @@
 #!/bin/bash
-npm test client/__tests__/encode.js
+echo "Make sure you have a running server on port 8081\n"
+npm test
 
 TOKEN=`babel-node test/new-token.js`
 echo http --body http://localhost:8081/verify?token=$TOKEN

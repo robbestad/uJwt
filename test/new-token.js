@@ -1,4 +1,4 @@
-import JWT from "../client/lib/encode.js";
+import JWT from "../client/lib/jwt.js";
 const {OctetFromClaims,Base64Claims,CreateJWT,Sign} = JWT;
 const key = "big-secret"
 
