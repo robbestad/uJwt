@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/svenanders/openresty-jwt/compare/v0.1.18...v0.2.0) (2018-09-20)
+
+
+
 <a name="0.1.18"></a>
 ## [0.1.18](https://github.com/svenanders/openresty-jwt/compare/v0.1.17...v0.1.18) (2018-09-19)
 
