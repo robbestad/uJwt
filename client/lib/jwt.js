@@ -30,7 +30,7 @@ function CreateJOSEbody(input) {
 	return joseBody;
 }
 
-function Sign(alg, key, header, message) {
+function CreateToken(alg, key, header, message) {
 	const signature = Crypto.createHmac(alg, key).update(`${header}.${message}`).digest("utf8");
 	return CreateJOSEbody(signature);
 }
@@ -81,7 +81,7 @@ function CreateJWT(claims) {
 	// --> nbf (not before) reverse expiration time
 	// --> iat (issued at, timestamp)
 	// --> jti (unique identifier. can be used to prevent the JWT from being replayed)
-	const signature = Sign("sha256", "big-secret", joseHeader, joseMessage);
+	const signature = CreateToken("sha256", "big-secret", joseHeader, joseMessage);
 	return `${joseHeader}.${joseMessage}.${signature}`
 }
 
