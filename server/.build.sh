@@ -9,7 +9,7 @@ TAG=`git rev-parse --verify HEAD`
 APP=jwt-server
 CTX=jwt
 USER=svena
-REPO=nginx-mediaproxy
+REPO=nginx-jwt-server
 
 echo -------------
 echo docker build -t svena/$APP:$TAG .
