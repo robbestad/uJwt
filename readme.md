@@ -1,4 +1,4 @@
-# JWT
+# OpenResty JWT
 
 ### Motivation
 
