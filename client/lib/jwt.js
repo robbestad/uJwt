@@ -98,7 +98,11 @@ function Sign(key, _claims, units, unit) {
 	const signature = Crypto.createHmac('sha256', key).update(`${joseHeader}.${joseMessage}`).digest('base64');
 
 
-	return `${joseHeader}.${joseMessage}.${signature}`;
+	function escapeBase64Url(key) {
+		return key.replace(/\+/g, '-').replace(/\//g, '_');
+	}
+	// console.log(`${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`)
+	return `${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`;
 }
 
 function Verify(key, token) {

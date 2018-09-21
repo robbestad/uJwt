@@ -5,5 +5,5 @@ const key = "big-secret"
 const claim = {
 	"file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
 };
-const generatedToken = Sign(key, claim, 2, "hours");
+const generatedToken = Sign(key, claim, 24, "hours");
 console.log(generatedToken)
