@@ -8,6 +8,11 @@
 
 ## Algorithm when not using an external authentication service
 
+## Test
+
+For sanity checking, the generated token is verified against _nJwt_, a popular JWT lib. To install, 
+run `git submodule update --init --recursive` before executing any of the npm tests.
+
 ##### Generate Message and Signature
 ```
 client generates message
