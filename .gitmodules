@@ -1,0 +1,3 @@
+[submodule "njwt"]
+	path = njwt
+	url = https://github.com/jwtk/njwt
