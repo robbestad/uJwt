@@ -1,2 +1,7 @@
 server/
+rollup.config.js
+utils/
+client/
+yarn.lock
+.idea
 njwt/
