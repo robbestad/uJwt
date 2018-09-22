@@ -60,7 +60,6 @@ describe('Encode token in accordance with rfc7519', () => {
 		};
 		const generatedToken = Sign(key, claims, 2, "hours");
 		const result = await Verify(key, generatedToken);
-		console.log(generatedToken)
 		expect(JSON.parse(result).file).toEqual(claims.file);
 	});
 
