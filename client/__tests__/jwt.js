@@ -1,5 +1,4 @@
 import JWT from "../../client/lib/jwt.js";
-import nJwt from ".../../../njwt/index.js";
 
 const {OctetFromClaims, Base64Claims, CreateJWT, Sign, Verify} = JWT;
 const key = "big-secret"
@@ -63,17 +62,5 @@ describe('Encode token in accordance with rfc7519', () => {
 		const result = await Verify(key, generatedToken);
 		expect(JSON.parse(result).file).toEqual(claims.file);
 	});
-
-	/* Sanity check against a popular JWT lib */
-	/* Produces a warning in the console because njwt is using an unsafe Buffer() call */
-	it("Verify with nJwt", async () => {
-		const claims = {
-			"file": "/resource/2018/06/11/somefile.mp4",
-			"user": "svena"
-		};
-		const generatedToken = Sign(key, claims, 2, "hours");
-		const verify = await nJwt.verify(generatedToken, key, "HS256")
-		expect(verify.body.file).toEqual(claims.file)
-	})
 
 })
