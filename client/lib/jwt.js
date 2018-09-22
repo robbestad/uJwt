@@ -1,7 +1,4 @@
 import Crypto from "crypto";
-import AddMinutes from "./add-minutes";
-import AddSeconds from "./add-minutes";
-import AddHours from "./add-hours";
 
 // JWS -> JSON Web Signature
 // JWE -> JSON Web Encryption
@@ -72,36 +69,17 @@ function CreateJOSEbody(input) {
 	return joseBody;
 }
 
-function Sign(key, _claims, units, unit) {
+function Sign(key, claims, units, unit) {
 	const header = '{"typ":"JWT",\r\n "alg":"HS256"}';
-
-	let expireAt = "";
-	switch (unit) {
-		case "seconds": {
-			expireAt = AddSeconds(new Date(), units).getTime()
-		}
-		case "minutes": {
-			expireAt = AddMinutes(new Date(), units).getTime()
-		}
-		case "hours": {
-			expireAt = AddHours(new Date(), units).getTime()
-		}
-	}
-
-	const claims = Object.assign({}, _claims, {
-		"exp": expireAt
-	});
 
 	const joseHeader = CreateJOSEbody(header);
 	const joseMessage = CreateJOSEbody(JSON.stringify(claims));
 
 	const signature = Crypto.createHmac('sha256', key).update(`${joseHeader}.${joseMessage}`).digest('base64');
 
-
 	function escapeBase64Url(key) {
 		return key.replace(/\+/g, '-').replace(/\//g, '_');
 	}
-	// console.log(`${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`)
 	return `${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`;
 }
 
