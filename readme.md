@@ -3,8 +3,24 @@
 ### Motivation
 
 * Create a micro JWT lib that does just the bare essentials in accordance with JWT spec
+* Provide a server implementation that authenticates the user 
 
-## Algorithm when not using an external authentication service
+## Usage
+
+```
+// Generate token
+const claims = {
+  "key": "value"
+};
+const token = Sign(alg, key, claims);
+
+// Verify token
+const verify = Verify(alg, key, token);
+```
+
+## Example implementations
+
+### Algorithm when not using an external authentication service
 
 ##### Generate Message and Signature
 ```
