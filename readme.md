@@ -19,7 +19,7 @@ The result is a header.message.signature that can be used in a capability based 
 
 Example token (_header.message.signature_) using password *big-secret*:
 ```
-    eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJmaWxlIjoiL3Jlc291cmNlLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0In0.-yr9RlB9gzVSV8WyKSx5gmp6sjnS9inpDBN7413jdVU=
+eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJmaWxlIjoiL3Jlc291cmNlLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0In0.-yr9RlB9gzVSV8WyKSx5gmp6sjnS9inpDBN7413jdVU=
 ```
 
 ## Strategies
