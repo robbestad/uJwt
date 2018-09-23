@@ -1,7 +1,7 @@
 {
   "name": "@svenardo/ujwt",
   "private": false,
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "µJWT - a small JWT token lib",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
@@ -10,9 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
-    "prerelease": "rollup -c",
-    "release": "standard-version",
-    "postrelease": "git push --follow-tags origin master && npm publish --access=public"
+    "release": "echo run sh release.sh <OTP>"
   },
   "jest": {
     "verbose": true,
