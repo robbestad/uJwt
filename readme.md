@@ -2,8 +2,7 @@
 
 ### Motivation
 
-* Provide a JWT (JSON Web Token) that allows access to a given resource to a given user for a given time
-* Provide a server implementation that authenticates the user without any calls to the authentication server
+* Create a micro JWT lib that does just the bare essentials in accordance with JWT spec
 
 ## Algorithm when not using an external authentication service
 
@@ -18,14 +17,12 @@ client generates message
 ```
 The result is a header.message.signature that can be used in a capability based link
 
-Example _header.message.signature_:
+Example token (_header.message.signature_) using password *big-secret*:
 ```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
+    eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJmaWxlIjoiL3Jlc291cmNlLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0In0.-yr9RlB9gzVSV8WyKSx5gmp6sjnS9inpDBN7413jdVU=
 ```
-Example _link_:
-```
-/resource/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlIjoiL2ZvbGtlbXVzaWtrLzIwMTgvMDYvMTEvYXNuZDA5MTJubnNudWM5ODIubXA0IiwiZXhwaXJlQXQiOiIyMDE4LTA5LTE1VDEwOjQ2OjUzLjMwN1oifQ==.tz8XOxhXx0WX2y+cyz38WJoRMvdv7wtcCkEG+pmiH94=
-```
+
+## Strategies
 
 ##### Handling /resource/message.signature
 ```
@@ -39,7 +36,7 @@ else
 ```
 
 
-## Algorithm when using an external Active Directory
+### Algorithm when using an external Active Directory
 
 ##### /sign
 ```
