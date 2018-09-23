@@ -49,7 +49,7 @@ describe('Encode token in accordance with rfc7519', () => {
 		const claims = {
 			"file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
 		};
-		const generatedToken = Sign(key, claims, 2, "hours");
+		const generatedToken = Sign("sha256", key, claims);
 		const result = await Verify("different-key", generatedToken);
 		expect(result).toEqual(false);
 	})
@@ -58,7 +58,7 @@ describe('Encode token in accordance with rfc7519', () => {
 		const claims = {
 			"file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
 		};
-		const generatedToken = Sign(key, claims, 2, "hours");
+		const generatedToken = Sign("sha256", key, claims);
 		const result = await Verify(key, generatedToken);
 		expect(JSON.parse(result).file).toEqual(claims.file);
 	});

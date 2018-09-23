@@ -69,8 +69,20 @@ function CreateJOSEbody(input) {
 	return joseBody;
 }
 
-function Sign(key, claims, units, unit) {
-	const header = '{"typ":"JWT",\r\n "alg":"HS256"}';
+function Sign(alg, key, claims) {
+	let algo="";
+	switch(alg){
+		case "sha256": {
+			algo = "HS256";
+			break;
+		}
+		default: {
+			algo = "HS256";
+			break;
+		}
+	}
+
+	const header = `{"typ":"JWT",\r\n "alg":"${algo}"}`;
 
 	const joseHeader = CreateJOSEbody(header);
 	const joseMessage = CreateJOSEbody(JSON.stringify(claims));
