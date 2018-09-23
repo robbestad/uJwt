@@ -1,7 +1,7 @@
 {
   "name": "@svenardo/ujwt",
   "private": false,
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "µJWT - a small JWT token lib",
   "author": "Sven Anders Robbestad <robbestad@gmail.com>",
   "main": "bundle.js",
