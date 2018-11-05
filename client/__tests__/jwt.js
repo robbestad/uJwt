@@ -26,22 +26,13 @@ describe('Encode token in accordance with rfc7519', () => {
         expect(base64encoded).toEqual("eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ")
     })
 
-    it('Invalid JWT', async () => {
-        expect(() => {
-            const claims = {
-                "file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
-            };
-            const generatedToken = Sign("sha256", key, claims);
-            Verify("different-key", generatedToken);
-        }).toThrow();
-    })
 
     it("Create a valid signed string with a base64 encoded secret", async () => {
         const claims = {
             "file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
         };
         const generatedToken = Sign("sha256", key, claims, true);
-        const result = await Verify(key, generatedToken);
+        const result = await Verify(key, generatedToken, true);
         expect(JSON.parse(result).file).toEqual(claims.file);
     })
 
@@ -53,5 +44,16 @@ describe('Encode token in accordance with rfc7519', () => {
         const result = await Verify(key, generatedToken);
         expect(JSON.parse(result).file).toEqual(claims.file);
     });
+
+    it('Invalid JWT', async () => {
+        expect(() => {
+            const claims = {
+                "file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
+            };
+            const generatedToken = Sign("sha256", key, claims);
+            Verify("different-key", generatedToken);
+        }).toThrow();
+    })
+
 
 })

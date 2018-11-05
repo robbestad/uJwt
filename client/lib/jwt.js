@@ -46,98 +46,104 @@ import Crypto from "crypto";
  * @return {string}
  */
 function Base64urlEncode(str) {
-	return new Buffer.from(str)
-	.toString('base64')
-	.replace(/\+/g, '-')
-	.replace(/\//g, '_')
-	.replace(/=/g, '');
+    return new Buffer.from(str)
+        .toString('base64')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
 }
 
 function OctetFromClaims(claims) {
-	const octets = [];
-	for (let i = 0, length = claims.length; i < length; i++) {
-		const code = claims.charCodeAt(i);
-		octets.push(code & 0xff);
-	}
-	return octets;
+    const octets = [];
+    for (let i = 0, length = claims.length; i < length; i++) {
+        const code = claims.charCodeAt(i);
+        octets.push(code & 0xff);
+    }
+    return octets;
 }
 
 /**
  * @return {string}
  */
 function Base64Claims(octets) {
-	return Base64urlEncode(octets);
+    return Base64urlEncode(octets);
 }
 
 /**
  * @return {string}
  */
 function CreateJOSEbody(input) {
-	const octets = OctetFromClaims(input);
-	return Base64urlEncode(octets);
+    const octets = OctetFromClaims(input);
+    return Base64urlEncode(octets);
 }
 
 /**
  * @return {string}
  */
-function Sign(alg, key, claims, base64Encoded=false) {
-	let algo="";
-	switch(alg){
-		case "sha256": {
-			algo = "HS256";
-			break;
-		}
-		default: {
-			algo = "HS256";
-			break;
-		}
-	}
+function Sign(alg, key, claims, base64Encoded = false) {
+    function escapeBase64Url(secret) {
+        return secret.replace(/\+/g, '-').replace(/\//g, '_');
+    }
 
-	let secret = key
-	if(base64Encoded){
-		secret = key.toString("base64")
-	}
 
-	const header = `{"typ":"JWT",\r\n "alg":"${algo}"}`;
+    let algo = "";
+    switch (alg) {
+        case "sha256": {
+            algo = "HS256";
+            break;
+        }
+        default: {
+            algo = "HS256";
+            break;
+        }
+    }
 
-	const joseHeader = CreateJOSEbody(header);
-	const joseMessage = CreateJOSEbody(JSON.stringify(claims));
+    let secret = key
+    if(base64Encoded){
+        secret = Buffer.from(key, 'base64');
+    }
 
-	const signature = Crypto.createHmac('sha256', secret).update(`${joseHeader}.${joseMessage}`).digest('base64');
+    const header = `{"typ":"JWT",\r\n "alg":"${algo}"}`;
 
-	function escapeBase64Url(secret) {
-		return secret.replace(/\+/g, '-').replace(/\//g, '_');
-	}
-	return `${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`;
+    const joseHeader = CreateJOSEbody(header);
+    const joseMessage = CreateJOSEbody(JSON.stringify(claims));
+    let signature = Crypto.createHmac('sha256', secret).update(`${joseHeader}.${joseMessage}`).digest('base64');
+
+    return `${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`;
 }
 
 /**
  * @return {string}
  */
-function Verify(key, token) {
+function Verify(key, token, base64Encoded=false) {
 
-	const _ = token.split(".");
-	const message = Buffer.from(_[1], 'base64').toString('ascii'),
-		retrievedSignature = _[2],
-		retrievedHeader = _[0];
+    const _ = token.split(".");
+    const message = Buffer.from(_[1], 'base64').toString('ascii'),
+        retrievedSignature = _[2],
+        retrievedHeader = _[0];
 
-	const computedSignature = Crypto.createHmac('sha256', key).update(`${_[0]}.${_[1]}`).digest('base64');
-	const computedSignatureBuffer = Buffer.from(computedSignature, 'base64');
-	const retrievedSignatureBuffer = Buffer.from(retrievedSignature, 'base64');
+    let secret = key
+    if(base64Encoded){
+        secret = Buffer.from(key, 'base64');
+    }
 
-	const valid = Crypto.timingSafeEqual(computedSignatureBuffer, retrievedSignatureBuffer);
-	if (valid) {
-		return message;
-	} else {
-		throw new Error("Could not verify signature");
-	}
+    const computedSignature = Crypto.createHmac('sha256', secret).update(`${_[0]}.${_[1]}`).digest('base64');
+    const computedSignatureBuffer = Buffer.from(computedSignature, 'base64');
+    const retrievedSignatureBuffer = Buffer.from(retrievedSignature, 'base64');
+
+    const valid = Crypto.timingSafeEqual(computedSignatureBuffer, retrievedSignatureBuffer);
+    if (valid) {
+        return message;
+    } else {
+        throw new Error("Could not verify signature");
+    }
 }
 
 export default {
-	Sign,
-	Verify,
-	OctetFromClaims,
-	Base64Claims
+    Sign,
+    Verify,
+    OctetFromClaims,
+    Base64Claims
 }
 
 
