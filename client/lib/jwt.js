@@ -42,6 +42,9 @@ import Crypto from "crypto";
 // --> iat (issued at, timestamp)
 // --> jti (unique identifier. can be used to prevent the JWT from being replayed)
 
+/**
+ * @return {string}
+ */
 function Base64urlEncode(str) {
 	return new Buffer.from(str)
 	.toString('base64')
@@ -59,17 +62,25 @@ function OctetFromClaims(claims) {
 	return octets;
 }
 
+/**
+ * @return {string}
+ */
 function Base64Claims(octets) {
 	return Base64urlEncode(octets);
 }
 
+/**
+ * @return {string}
+ */
 function CreateJOSEbody(input) {
 	const octets = OctetFromClaims(input);
-	const joseBody = Base64urlEncode(octets);
-	return joseBody;
+	return Base64urlEncode(octets);
 }
 
-function Sign(alg, key, claims) {
+/**
+ * @return {string}
+ */
+function Sign(alg, key, claims, base64Encoded=false) {
 	let algo="";
 	switch(alg){
 		case "sha256": {
@@ -82,19 +93,27 @@ function Sign(alg, key, claims) {
 		}
 	}
 
+	let secret = key
+	if(base64Encoded){
+		secret = key.toString("base64")
+	}
+
 	const header = `{"typ":"JWT",\r\n "alg":"${algo}"}`;
 
 	const joseHeader = CreateJOSEbody(header);
 	const joseMessage = CreateJOSEbody(JSON.stringify(claims));
 
-	const signature = Crypto.createHmac('sha256', key).update(`${joseHeader}.${joseMessage}`).digest('base64');
+	const signature = Crypto.createHmac('sha256', secret).update(`${joseHeader}.${joseMessage}`).digest('base64');
 
-	function escapeBase64Url(key) {
-		return key.replace(/\+/g, '-').replace(/\//g, '_');
+	function escapeBase64Url(secret) {
+		return secret.replace(/\+/g, '-').replace(/\//g, '_');
 	}
 	return `${joseHeader}.${joseMessage}.${escapeBase64Url(signature)}`;
 }
 
+/**
+ * @return {string}
+ */
 function Verify(key, token) {
 
 	const _ = token.split(".");
@@ -110,7 +129,7 @@ function Verify(key, token) {
 	if (valid) {
 		return message;
 	} else {
-		return false;
+		throw new Error("Could not verify signature");
 	}
 }
 
