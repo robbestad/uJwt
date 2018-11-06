@@ -36,6 +36,12 @@ describe('Encode token in accordance with rfc7519', () => {
         expect(JSON.parse(result).file).toEqual(claims.file);
     })
 
+    it("Create a valid signed that decodes with Open Resty", async () => {
+        const claims = { exp: 1541522054.651 };
+        const generatedToken = Sign("sha256", "rHrMQjDHmQ9tNLr62NLM6PNGRt", claims, false);
+        expect(generatedToken).toEqual("eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDE1MjIwNTQuNjUxfQ.-dcuC4H1Sd1KEZ9VHH5Tx5NNVc61g_AENS3-evpLa4c=");
+    })
+
     it('Decodes the filename', async () => {
         const claims = {
             "file": "/resource/2018/06/11/asnd0912nnsnuc982.mp4"
